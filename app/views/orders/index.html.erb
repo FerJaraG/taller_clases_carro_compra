@@ -1,0 +1,39 @@
+<br><br>
+
+<%= link_to 'Continuar comprando', root_path, class:"btn btn-warning" %> <br><br>
+<%= link_to 'Vaciar Carrito', empty_cart_orders_path, class:"btn btn-warning", method: :delete%> <br><br>
+<% if @orders.present? %>
+	<table class="table table-hover">
+		<tr>
+			<th>Producto</th>
+			<th>Valor Unitario</th>
+			<th>Cantidad</th>
+			<th>Subtotal</th>
+			<th>Accion</th>
+		</tr>
+		<% @orders.each do |order| %>
+		<tr>
+			<td><%= order.product.name %></td>
+			<td>$<%= order.product.price %></td>
+			<td><%= order.quantity %></td>
+			<td><%= order.quantity * order.product.price%></td>
+			<td><%=link_to order_path(order), class: "btn btn-outline-danger btn-sm", method: :delete do %>
+					<i class="fas fa-trash-alt"></i>
+			<% end  %>
+			</td>
+		</tr>
+		<% end %>
+
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+			<th>
+				Total: $<%= @total %> 
+			</th>
+			<th></th>
+		</tr>
+	</table>
+<% else %>
+	<p>No tienes productos en el carrito...</p>
+<% end %>
