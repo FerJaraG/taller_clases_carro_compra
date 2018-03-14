@@ -34,6 +34,11 @@
 			<th></th>
 		</tr>
 	</table>
+	<div class="row">
+		<div class="col-md-2 offset-md-10">
+			<%= link_to "Confirmar Compra", pre_pay_billings_path, class: 'btn btn-outline-success' %>
+		</div>
+	</div>
 <% else %>
 	<p>No tienes productos en el carrito...</p>
 <% end %>

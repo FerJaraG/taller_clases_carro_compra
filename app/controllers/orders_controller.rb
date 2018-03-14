@@ -19,15 +19,16 @@ class OrdersController < ApplicationController
 		if @previous_order.present?
 			new_quantity = @previous_order.quantity + 1
 			@previous_order.update(quantity: new_quantity)
+			redirect_to root_path, notice: "#{@previous_order.product.name} ha sido agregado al carro."
 		else
 
-
 			@order = Order.new()
-			@order.product = Product.find(params[:product_id])
+			@product = Product.find(params[:product_id])
+			@order.product = @product
 			@order.user = current_user
-
+			@order.price = @product.price 
 			if @order.save 
-				redirect_to root_path, notice: "El producto ha sido agregado al carrito"
+				redirect_to root_path, notice: "El producto ha sido agregado al carro."
 			else
 				redirect_to root_path, alert: "El producto NO ha sido agregado al carrito"
 			end
